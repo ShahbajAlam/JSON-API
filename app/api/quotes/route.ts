@@ -4,6 +4,7 @@ import { connectDB } from "@/DB/dbConfig";
 import { Quote } from "@/DB/models/qoutes";
 
 // *******************  GET REQUEST  **************************
+export const dynamic = "force-static";
 
 const GET = async (request: NextRequest) => {
     await connectDB();
