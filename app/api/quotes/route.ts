@@ -3,8 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { connectDB } from "@/DB/dbConfig";
 import { Quote } from "@/DB/models/qoutes";
 
-const dynamic = "force-static";
-
 // *******************  GET REQUEST  **************************
 
 const GET = async (request: NextRequest) => {
@@ -56,4 +54,4 @@ const GET = async (request: NextRequest) => {
     }
 };
 
-export { GET, dynamic };
+export { GET };
