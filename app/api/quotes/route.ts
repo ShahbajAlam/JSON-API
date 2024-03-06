@@ -52,28 +52,4 @@ const GET = async (request: NextRequest) => {
     }
 };
 
-// *******************  POST REQUEST  **************************
-
-const POST = async (request: NextRequest) => {
-    await connectDB();
-    try {
-        const { text, author } = await request.json();
-
-        if (!text || !author) {
-            return NextResponse.json({
-                error: "Both TEXT and AUTHOR fields are required",
-                status: 400,
-            });
-        }
-
-        const quote = await Quote.create({ text, author });
-        return NextResponse.json({ status: 201, quote });
-    } catch (error) {
-        return NextResponse.json({
-            error: error.message,
-            status: 500,
-        });
-    }
-};
-
-export { GET, POST };
+export { GET };
