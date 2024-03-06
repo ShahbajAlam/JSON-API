@@ -7,12 +7,12 @@ import { Quote } from "@/DB/models/qoutes";
 
 const GET = async (request: NextRequest) => {
     await connectDB();
-    try {
-        const authorParam = request.nextUrl.searchParams
-            .get("author")
-            ?.toLowerCase();
-        const limitParam = request.nextUrl.searchParams.get("limit");
+    const authorParam = request.nextUrl.searchParams
+        .get("author")
+        ?.toLowerCase();
+    const limitParam = request.nextUrl.searchParams.get("limit");
 
+    try {
         // ALL QUOTES
         if (!authorParam && !limitParam) {
             const quotes = await Quote.find({});
