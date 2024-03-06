@@ -8,7 +8,9 @@ import { Quote } from "@/DB/models/qoutes";
 const GET = async (request: NextRequest) => {
     await connectDB();
     try {
-        const authorParam = request.nextUrl.searchParams.get("author");
+        const authorParam = request.nextUrl.searchParams
+            .get("author")
+            ?.toLowerCase();
         const limitParam = request.nextUrl.searchParams.get("limit");
 
         // ALL QUOTES
@@ -29,7 +31,7 @@ const GET = async (request: NextRequest) => {
         // ONLY AUTHOR PARAMETER
         if (!limitParam && authorParam) {
             const quotes = await Quote.find({
-                author: authorParam.toLowerCase(),
+                author: authorParam,
             });
             return NextResponse.json({ status: 200, quotes });
         }
@@ -40,7 +42,7 @@ const GET = async (request: NextRequest) => {
                 return NextResponse.json({ status: 200, quotes: [] });
             }
             const quotes = await Quote.find({
-                author: authorParam.toLowerCase(),
+                author: authorParam,
             }).limit(Number(limitParam));
             return NextResponse.json({ status: 200, quotes });
         }
