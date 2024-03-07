@@ -5,6 +5,10 @@ import { Quote } from "@/DB/models/qoutes";
 
 // *******************  GET REQUEST  **************************
 
+const headers = {
+    "Access-Control-Allow-Origin": "*",
+};
+
 const GET = async (request: NextRequest) => {
     await connectDB();
 
@@ -17,16 +21,25 @@ const GET = async (request: NextRequest) => {
         // ALL QUOTES
         if (!authorParam && !limitParam) {
             const quotes = await Quote.find({});
-            return NextResponse.json({ status: 200, quotes });
+            return new NextResponse(JSON.stringify(quotes), {
+                headers,
+                status: 200,
+            });
         }
 
         // ONLY LIMIT PARAMETER
         if (!authorParam && limitParam) {
             if (Number(limitParam) <= 0) {
-                return NextResponse.json({ status: 200, quotes: [] });
+                return new NextResponse(JSON.stringify([]), {
+                    headers,
+                    status: 200,
+                });
             }
             const quotes = await Quote.find({}).limit(Number(limitParam));
-            return NextResponse.json({ quotes, status: 200 });
+            return new NextResponse(JSON.stringify(quotes), {
+                headers,
+                status: 200,
+            });
         }
 
         // ONLY AUTHOR PARAMETER
@@ -34,22 +47,31 @@ const GET = async (request: NextRequest) => {
             const quotes = await Quote.find({
                 author: authorParam,
             });
-            return NextResponse.json({ status: 200, quotes });
+            return new NextResponse(JSON.stringify(quotes), {
+                headers,
+                status: 200,
+            });
         }
 
         // BOTH AUTHOR & LIMIT PARAMETERS
         if (limitParam && authorParam) {
             if (Number(limitParam) <= 0) {
-                return NextResponse.json({ status: 200, quotes: [] });
+                return new NextResponse(JSON.stringify([]), {
+                    headers,
+                    status: 200,
+                });
             }
             const quotes = await Quote.find({
                 author: authorParam,
             }).limit(Number(limitParam));
-            return NextResponse.json({ status: 200, quotes });
+            return new NextResponse(JSON.stringify(quotes), {
+                headers,
+                status: 200,
+            });
         }
     } catch (error) {
-        return NextResponse.json({
-            error: error.message,
+        return new NextResponse(JSON.stringify({ error: error.message }), {
+            headers,
             status: 500,
         });
     }
