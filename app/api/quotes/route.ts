@@ -7,6 +7,7 @@ import { Quote } from "@/DB/models/qoutes";
 
 const GET = async (request: NextRequest) => {
     await connectDB();
+
     const authorParam = request.nextUrl.searchParams
         .get("author")
         ?.toLowerCase();
