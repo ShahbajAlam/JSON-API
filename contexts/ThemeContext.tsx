@@ -17,11 +17,12 @@ type ThemeProps = {
 const ThemeContext = createContext<ThemeProps>(null);
 
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
-    const [theme, setTheme] = useState(() =>
-        localStorage.getItem("theme")
-            ? localStorage.getItem("theme")
-            : "bumblebee"
-    );
+    const [theme, setTheme] = useState(() => {
+        if (typeof localStorage !== "undefined")
+            return localStorage.getItem("theme")
+                ? localStorage.getItem("theme")
+                : "bumblebee";
+    });
 
     return (
         <ThemeContext.Provider value={{ theme, setTheme }}>

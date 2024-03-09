@@ -6,9 +6,9 @@ import { useEffect } from "react";
 
 const Navbar = () => {
     const { theme, setTheme } = useTheme();
-    const html = document.documentElement;
 
     useEffect(() => {
+        const html = document.documentElement;
         html.setAttribute("data-theme", theme);
         localStorage.setItem("theme", theme);
     }, [theme]);
