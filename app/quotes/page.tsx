@@ -35,17 +35,25 @@ const QuotePage = () => {
             </div>
 
             <h2 className="text-2xl my-4">Search Parameters</h2>
-            <ul>
-                <li className="text-lg">author</li>
-                <li className="text-lg">limit</li>
-            </ul>
-
+            <p className="mt-4 mb-2">Author</p>
             <div className="flex gap-10">
                 <p className="bg-slate-100 dark:bg-slate-800 px-4 py-2 rounded-md">
-                    https://jsonhub-shahbaj.vercel.app/api/quotes?author='robert
-                    frost'
+                    https://jsonhub-shahbaj.vercel.app/api/quotes?author='steve
+                    jobs'
                 </p>
-                <CopyBtn text="https://jsonhub-shahbaj.vercel.app/api/quotes?author='robert frost'" />
+                <CopyBtn text="https://jsonhub-shahbaj.vercel.app/api/quotes?author='steve jobs'" />
+            </div>
+
+            <h2 className="text-2xl my-4">Example Response</h2>
+            <div className="bg-slate-100 dark:bg-slate-800 px-4 py-2 rounded-md w-[50%]">
+                <p>{leftBrace}</p>
+                <p>"_id": "65e992561c0eccc9ec043cce",</p>
+                <p>
+                    "quote": "Your time is limited, don't waste it living
+                    someone else's life.",
+                </p>
+                <p>"author": "steve jobs"</p>
+                <p>{rightBrace}</p>
             </div>
         </div>
     );
