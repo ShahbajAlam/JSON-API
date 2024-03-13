@@ -23,7 +23,7 @@ const Carousel = () => {
     }, []);
 
     return (
-        <div className="relative w-[25rem] h-[25rem] flex justify-center items-center bg-red-400 rounded-2xl overflow-hidden">
+        <div className="relative w-[20rem] h-[20rem] flex justify-center items-center bg-red-400 rounded-2xl overflow-hidden">
             <img
                 src={images[currentIndex]}
                 alt={`image-${currentIndex}`}
