@@ -16,9 +16,10 @@ const GET = async (request: NextRequest) => {
     const limitParam = request.nextUrl.searchParams.get("limit");
 
     if (
-        authorParam.startsWith('"') ||
-        authorParam.startsWith("'") ||
-        authorParam.startsWith("`")
+        authorParam &&
+        (authorParam.startsWith('"') ||
+            authorParam.startsWith("'") ||
+            authorParam.startsWith("`"))
     )
         authorParam = authorParam.slice(1, authorParam.length - 1);
 
