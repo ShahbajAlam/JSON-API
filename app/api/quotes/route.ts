@@ -12,10 +12,15 @@ const headers = {
 const GET = async (request: NextRequest) => {
     await connectDB();
 
-    const authorParam = request.nextUrl.searchParams
-        .get("author")
-        ?.toLowerCase();
+    let authorParam = request.nextUrl.searchParams.get("author")?.toLowerCase();
     const limitParam = request.nextUrl.searchParams.get("limit");
+
+    if (
+        authorParam.startsWith('"') ||
+        authorParam.startsWith("'") ||
+        authorParam.startsWith("`")
+    )
+        authorParam = authorParam.slice(1, authorParam.length - 1);
 
     try {
         // ALL QUOTES
